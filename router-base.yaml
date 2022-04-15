@@ -8,7 +8,7 @@ allow-lan: true
 mode: Rule
 log-level: warning
 #接口控制端口你可以自己设置，默认是9090
-external-controller: 0.0.0.0:8091
+external-controller: 0.0.0.0:6002
 #如果服务器对公网开放可以设置密码
 secret: "art.hur.623"
 #external-ui: dashboard
