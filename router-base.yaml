@@ -1,29 +1,49 @@
+redir-port: 7892
 port: 7890
 socks-port: 7891
-#转发端口一定要配置
-redir-port: 7892
-#允许接管局域网流量
+mixed-port: 7893
+mode: rule
+log-level: silent
 allow-lan: true
-#默认代理模式
-mode: Rule
-log-level: warning
-#接口控制端口你可以自己设置，默认是9090
-external-controller: 0.0.0.0:6000
-#如果服务器对公网开放可以设置密码
-#secret: "art.hur.623"
-#external-ui: dashboard
-#配置由clash接管的dns解析
+external-controller: 0.0.0.0:9090
+secret: '123456'
+bind-address: "*"
+external-ui: "/usr/share/openclash/dashboard"
 dns:
   enable: true
-#主要监听定向转发来的数据，后续会在路由表里配置转发端口为1053
-  listen: 0.0.0.0:1053
+  ipv6: false
   enhanced-mode: redir-host
-#见下方链接
+  listen: 127.0.0.1:7874
   nameserver:
-    - '114.114.114.114'
-    - '223.5.5.5'
+  - 114.114.114.114
+  - 119.29.29.29
   fallback:
-    - 'tls://1.1.1.1:853'
-    - 'tcp://1.1.1.1:53'
-    - 'tcp://208.67.222.222:443'
-    - 'tls://dns.google'
+  - https://cloudflare-dns.com/dns-query
+  - https://dns.google/dns-query
+  - https://1.1.1.1/dns-query
+  - tls://8.8.8.8:853
+  fallback-filter:
+    geoip: false
+    ipcidr:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.18.0.0/15
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/4
+    - 240.0.0.0/4
+    - 255.255.255.255/32
+    domain:
+    - "+.google.com"
+    - "+.facebook.com"
+    - "+.youtube.com"
+    - "+.githubusercontent.com"
+ipv6: false
